@@ -1,28 +1,9 @@
-/**
- * Debounces a function, ensuring it's only called after a specified delay
- * since the last invocation.
- *
- * @param {Function} func The function to debounce.
- * @param {number} delay The delay in milliseconds.
- * @returns {Function} A new function that, when called, will debounce the original function.
- */
-function debounce(func, delay) {
-  let timeoutId;
-  return function (...args) {
-    const context = this;
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      func.apply(context, args);
-    }, delay);
-  };
-}
-
 // Game state
 let timer;
 let score;
 let hitval;
 let totalhits;
-let isRunning;
+let isRunning = false;
 
 function initGameState() {
   score = 0;
@@ -115,7 +96,7 @@ function initBubbles() {
 
 window.addEventListener("resize", () => {
   if (isRunning) {
-    debounce(initBubbles, 200);
+    initBubbles();
   }
 });
 
