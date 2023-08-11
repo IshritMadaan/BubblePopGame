@@ -22,12 +22,14 @@ let timer;
 let score;
 let hitval;
 let totalhits;
+let isRunning;
 
 function initGameState() {
   score = 0;
   totalhits = 0;
   hitval = 5;
   timer = 10;
+  isRunning = false;
 }
 
 const mainElement = document.querySelector("main");
@@ -111,7 +113,11 @@ function initBubbles() {
   }
 }
 
-window.addEventListener("resize", debounce(initBubbles, 200));
+window.addEventListener("resize", () => {
+  if (isRunning) {
+    debounce(initBubbles, 200);
+  }
+});
 
 function startTimer() {
   document.querySelector("#timerval").textContent = timer;
@@ -126,6 +132,7 @@ function startTimer() {
 }
 
 function showEndScreen() {
+  isRunning = false;
   const bubbleArea = document.getElementById("pbottom");
   bubbleArea.style.setProperty("grid-template-columns", "1fr");
   bubbleArea.style.setProperty("grid-template-rows", "1fr");
@@ -187,6 +194,7 @@ function startGame() {
     }
   });
 
+  isRunning = true;
   startTimer();
   getNewHit();
 }
