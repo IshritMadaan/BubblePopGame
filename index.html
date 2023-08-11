@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
+    <title>Bubble Pop</title>
+  </head>
+  <body>
+    <div>
+      <header>
+        <h1>Bubble Pop</h1>
+        <p>Pop the bubbles before time runs out!</p>
+      </header>
+      <main>
+        <template id="main-menu">
+          <div class="main-menu">
+            <button id="start-game">Start Game</button>
+            <!-- <button data-variant="secondary">Settings</button> -->
+          </div>
+        </template>
+        <template id="game-menu">
+          <div class="game-menu">
+            <div id="ptop">
+              <div>
+                <h2>To Hit</h2>
+                <div class="box">
+                  <span id="hitval">5</span>
+                </div>
+              </div>
+              <div>
+                <h2>Timer</h2>
+                <div class="box">
+                  <span id="timerval">60</span>
+                </div>
+              </div>
+              <div>
+                <h2>Score</h2>
+                <div class="box">
+                  <span id="scoreval">0</span>
+                </div>
+              </div>
+            </div>
+            <div id="pbottom">
+              <!-- BUBBLES APPEAR HERE -->
+            </div>
+          </div>
+        </template>
+        <template id="end-screen">
+          <div class="end-screen">
+            <span>Game Over</span>
+            <p id="scoreval">Final Score: ${score}</p>
+            <p id="totalhitsval">Total Hits: ${totalhits}</p>
+            <button id="replay-btn">Play Again</button>
+          </div>
+        </template>
+      </main>
+      <footer>
+        <p>
+          Made by <a href="https://github.com/IshritMadaan">Ishrit Madaan</a>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
