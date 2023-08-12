@@ -160,3 +160,38 @@ button[data-variant="secondary"]:active {
 .end-screen p {
   font-size: 1.5rem;
 }
+
+.settings-menu {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 1rem;
+  padding-inline: 2rem;
+  place-content: center;
+}
+
+.settings-menu h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.setting-item label {
+  font-size: 1.2em;
+  margin-right: 1rem;
+}
+
+.setting-item input[type="number"] {
+  width: 80px;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  text-align: center;
+}

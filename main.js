@@ -5,11 +5,15 @@ let hitval;
 let totalhits;
 let isRunning = false;
 
+// New settings variables
+let gameTimerDuration = 60;
+let gameScorePointsPerHit = 10;
+
 function initGameState() {
   score = 0;
   totalhits = 0;
   hitval = 5;
-  timer = 10;
+  timer = gameTimerDuration;
   isRunning = false;
 }
 
@@ -17,6 +21,7 @@ const mainElement = document.querySelector("main");
 const mainMenu = document.getElementById("main-menu");
 const gameMenu = document.getElementById("game-menu");
 const endScreenT = document.getElementById("end-screen");
+const settingsScreenT = document.getElementById("settings-screen");
 
 function setupMainMenu() {
   mainElement.innerHTML = "";
@@ -29,9 +34,57 @@ function setupMainMenu() {
     mainElement.replaceChildren(clone);
     startGame();
   });
+
+  const settingsButton = mainElement.querySelector("#settings-btn");
+  settingsButton.addEventListener("click", setupSettingsMenu);
 }
 
-document.addEventListener("DOMContentLoaded", setupMainMenu);
+document.addEventListener("DOMContentLoaded", () => {
+  loadSettings();
+  setupMainMenu();
+});
+
+function setupSettingsMenu() {
+  mainElement.innerHTML = "";
+  const clone = settingsScreenT.content.cloneNode(true);
+  mainElement.appendChild(clone);
+
+  const timerDurationInput = mainElement.querySelector("#timer-duration");
+  const scorePointsInput = mainElement.querySelector("#score-points");
+  const backToMainButton = mainElement.querySelector("#back-to-main");
+
+  timerDurationInput.value = gameTimerDuration;
+  scorePointsInput.value = gameScorePointsPerHit;
+
+  timerDurationInput.addEventListener("change", (e) => {
+    gameTimerDuration = parseInt(e.target.value);
+    saveSettings();
+  });
+
+  scorePointsInput.addEventListener("change", (e) => {
+    gameScorePointsPerHit = parseInt(e.target.value);
+    saveSettings();
+  });
+
+  backToMainButton.addEventListener("click", setupMainMenu);
+}
+
+function saveSettings() {
+  localStorage.setItem("gameTimerDuration", gameTimerDuration);
+  localStorage.setItem("gameScorePointsPerHit", gameScorePointsPerHit);
+}
+
+function loadSettings() {
+  const savedTimerDuration = localStorage.getItem("gameTimerDuration");
+  const savedScorePoints = localStorage.getItem("gameScorePointsPerHit");
+
+  if (savedTimerDuration) {
+    gameTimerDuration = parseInt(savedTimerDuration);
+  }
+  if (savedScorePoints) {
+    gameScorePointsPerHit = parseInt(savedScorePoints);
+  }
+}
 
 function initBubbles() {
   const bubbleArea = document.getElementById("pbottom");
@@ -146,7 +199,7 @@ function getRandomInt() {
 }
 
 function increaseScore() {
-  score += 10;
+  score += gameScorePointsPerHit;
   document.querySelector("#scoreval").textContent = score;
 }
 
